@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+<!--    mybatis 逆向工程文件-->
+<!--    逆向工程文件需要在运行的时候执行这个文件 拿个@Test跑一下就行-->
+<!--    mybatis 逆向工程会自动帮你生成 DAO bean 和mapper文件-->
+
+    <context id="DB2Tables" targetRuntime="MyBatis3">
+        <!--        生成没有注释的bean-->
+        <commentGenerator>
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+        <!--        配置数据库连接信息-->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://localhost:3306/furns_ssm?useSSL=false&amp;characterEncoding=utf8"
+                        userId="root"
+                        password="root">
+        </jdbcConnection>
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+        <!--        指定javaBean生成的位置-->
+<!--        targetProject=".\src\main\java 这个是工程路径-->
+        <javaModelGenerator targetPackage="all.bean" targetProject=".\src\main\java">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+        <!--        指定sql映射文件生成的位置 你写的xml 文件
+        1. 要根据自己的实际情况指定
+        -->
+        <sqlMapGenerator targetPackage="mapper" targetProject=".\src\main\resources">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+        <!--        指定dao接口生成的位置, 也就是mapper接口-->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="all.dao" targetProject=".\src\main\java">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+        <!--        指定要逆向生成的表和生成策略-->
+<!--        数据库下面的表 的名字 domainO 是生成bean的名字-->
+        <table tableName="furn" domainObjectName="Furn"></table>
+    </context>
+</generatorConfiguration>
